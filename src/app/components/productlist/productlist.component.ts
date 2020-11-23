@@ -45,6 +45,14 @@ export class ProductlistComponent {
       isActive: false,
       imageUrl: "https://via.placeholder.com/150?text=RX100",
     },
+    {
+      productName: "Bajaj Pulsar",
+      description: "Nostalgic !",
+      releaseDate: "10-08-1920",
+      price: 9,
+      isActive: false,
+      imageUrl: "https://via.placeholder.com/150?text=Pulsar",
+    },
   ];
 
   getTitle(): string {
