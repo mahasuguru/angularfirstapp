@@ -6,18 +6,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './components/home.component';
 import { ProductsComponent } from './components/products.component';
 import { ProductlistComponent } from './components/productlist/productlist.component';
-
+import { IfNullOrEmpty } from './pipes/if-null-or-empty.pipe';
+import { LowerCasePipe, UpperCasePipe } from "@angular/common";
 @NgModule({
   declarations: [
     HomeComponent,
     ProductsComponent,
-    ProductlistComponent
+    ProductlistComponent,
+    IfNullOrEmpty
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty],
   bootstrap: [HomeComponent]
 })
 export class AppModule { }
