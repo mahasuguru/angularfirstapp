@@ -8,6 +8,8 @@ import { ProductsComponent } from './components/products.component';
 import { ProductlistComponent } from './components/productlist/productlist.component';
 import { IfNullOrEmpty } from './pipes/if-null-or-empty.pipe';
 import { LowerCasePipe, UpperCasePipe } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -17,7 +19,8 @@ import { LowerCasePipe, UpperCasePipe } from "@angular/common";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty],
   bootstrap: [HomeComponent]
