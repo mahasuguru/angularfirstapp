@@ -16,7 +16,9 @@
         <h4 class="card-title">{{i+1}}. {{product.productName | uppercase}}</h4>
         <p class="card-text">{{product.description}}</p>
        <!-- <p class="card-text" [ngStyle]="getStyles (product)">Price : {{product.price}}</p> -->
-        <p class="card-text" [ngClass]="getClasses (product)">Price : {{product.price}}</p>
+      <!--  <p class="card-text" [ngClass]="getClasses (product)">Price : {{product.price}}</p> -->
+        <p class="card-text" [ngStyle]="getStyles (product)">Price :
+          {{product.price | currency : 'INR':'Rs ' : '3.2-2' }}</p>
         <p class="card-text">{{product.releaseDate | date  : 'fullDate'    }}</p>
         <button type="button" class="btn btn-primary mr-2">Details</button>
         <button type="button" class="btn btn-success" [disabled]="!product.isActive">Buy Now</button>
