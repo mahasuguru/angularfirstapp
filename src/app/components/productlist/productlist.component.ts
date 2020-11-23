@@ -14,7 +14,7 @@ export class ProductlistComponent {
     private isNullOrEmpty: IfNullOrEmpty) { }
   showImages: boolean = false;
   pageTitle: string = 'Bike List';
-  searchText: string = "";
+  searchText: string = "hero";
   products: IProduct[] = [
     {
       productName: 'Hero Honda CD 100',
