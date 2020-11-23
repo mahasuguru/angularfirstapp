@@ -1,14 +1,16 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "app-home",
+  selector: 'app-home',
   template: `
   <h2>Hello From Home</h2>
   <h2 class="text-primary">Hello From Home</h2>
   <img src="assets/images/map.png" width="50%" />
   <i class="fa fa-user fa-3x"> </i>
   <hr/>
-  <app-product></app-product>
+  <app-productlist></app-productlist>
 `,
 })
-export class HomeComponent {}
+export class HomeComponent {
+
+}
