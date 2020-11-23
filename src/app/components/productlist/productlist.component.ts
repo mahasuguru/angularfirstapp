@@ -9,7 +9,7 @@ import { IProduct } from 'src/app/interfaces/product.interface';
 export class ProductlistComponent {
 
   constructor() { }
-
+  showImages: boolean = false;
   pageTitle: string = 'Bike List';
   products: IProduct[] = [
     {
@@ -17,7 +17,7 @@ export class ProductlistComponent {
       description: "Most popular Bike of India",
       releaseDate: "10-08-1990",
       price: 100,
-      isActive: false,
+      isActive: true,
       imageUrl: "https://via.placeholder.com/150?text=CD100SS",
     },
     {
@@ -49,5 +49,8 @@ export class ProductlistComponent {
 
   getTitle(): string {
     return 'Hello from Method';
+  }
+  toggleImages(): void {
+    this.showImages = !this.showImages;
   }
 }
