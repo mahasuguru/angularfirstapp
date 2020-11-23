@@ -14,7 +14,7 @@ export class ProductlistComponent {
     private isNullOrEmpty: IfNullOrEmpty) { }
   showImages: boolean = false;
   pageTitle: string = 'Bike List';
-  searchText: string = "hero";
+  searchText: string = "";
   products: IProduct[] = [
     {
       productName: 'Hero Honda CD 100',
@@ -110,4 +110,9 @@ export class ProductlistComponent {
       return {};
     }
   }
+  changeName() {
+    this.products[0].productName = "Nexon";
+  }
+  mouseEnterEvent() {}
+
 }
