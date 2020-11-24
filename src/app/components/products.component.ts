@@ -4,6 +4,8 @@ import {
   OnChanges,
   OnInit,
   SimpleChanges,
+  EventEmitter,
+  Output,
 } from "@angular/core";
 import { IProduct } from 'src/app/interfaces/product.interface';
 @Component({
@@ -14,7 +16,7 @@ export class ProductsComponent implements OnInit {
   constructor() {}
   @Input() productToBeRendered: IProduct;
   @Input() canShowImage: boolean;
-
+  @Output() onProductDeleted: EventEmitter<string> = new EventEmitter<string>();
   private counter: number = 0;
 
   ngOnInit(): void {
@@ -34,5 +36,10 @@ export class ProductsComponent implements OnInit {
       return {};
     }
   }
+  deleteProduct() {
+    console.log("Deleting product ", this.productToBeRendered.productName);
 
+    //HTTP call to the server. Or your complex logic.
+    this.onProductDeleted.emit(this.productToBeRendered.productName);
+  }
 }

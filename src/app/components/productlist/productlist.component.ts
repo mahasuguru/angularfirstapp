@@ -129,5 +129,11 @@ export class ProductlistComponent implements OnInit {
       this.products = this.actualBikes;
     }
   }
-
+  onSuccessfullyDeleted(productName: string) {
+    console.log("Inside Product List Componnet ", productName);
+    this.products.splice(
+      this.products.findIndex((item) => item.productName === productName),
+      1
+    );
+  }
 }

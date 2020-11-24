@@ -22,7 +22,8 @@
 <hr>
 <div class="row" *ngIf="products && products.length; else noBikes" (mousemove)="mouseEnterEvent()">
   <div class="col-md-4 mt-3" *ngFor="let product of products; let i = index;">
-    <app-products [productToBeRendered]="product" [canShowImage]="showImages"></app-products>
+    <app-products [productToBeRendered]="product" [canShowImage]="showImages"
+    (onProductDeleted)="onSuccessfullyDeleted($event)"></app-products>
   </div>
 </div>
 <ng-template #noBikes>
