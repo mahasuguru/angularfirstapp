@@ -15,6 +15,7 @@ export class ProductlistComponent {
   showImages: boolean = false;
   pageTitle: string = 'Bike List';
   searchText: string = "";
+
   products: IProduct[] = [
     {
       productName: 'Hero Honda CD 100',
@@ -58,6 +59,7 @@ export class ProductlistComponent {
       imageUrl: "https://via.placeholder.com/150?text=Pulsar",
     },
   ];
+  actualBikes: IProduct[] = [...this.products];
 
   getTitle(): string {
     return 'Hello from Method';
@@ -114,5 +116,14 @@ export class ProductlistComponent {
     this.products[0].productName = "Nexon";
   }
   mouseEnterEvent() {}
+  filterBikes() {
+    if (this.searchText) {
+      this.products = this.actualBikes.filter((x) =>
+        x.productName.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    } else {
+      this.products = this.actualBikes;
+    }
+  }
 
 }
