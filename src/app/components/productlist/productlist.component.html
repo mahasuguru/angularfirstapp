@@ -22,24 +22,9 @@
 <hr>
 <div class="row" *ngIf="products && products.length; else noBikes" (mousemove)="mouseEnterEvent()">
   <div class="col-md-4 mt-3" *ngFor="let product of products; let i = index;">
-    <div class="card text-left">
-      <img class="card-img-top" *ngIf="showImages" [src]="product.imageUrl" [title]="product.productName"
-      [style.padding.px]="'5'" alt="">
-      <div class="card-body">
-        <h4 class="card-title">{{i+1}}. {{product.productName | uppercase}}</h4>
-        <p class="card-text">Description : {{product.description | nullOrEmpty :  'Not Available' | uppercase}}</p>
-       <!-- <p class="card-text" [ngStyle]="getStyles (product)">Price : {{product.price}}</p> -->
-      <!--  <p class="card-text" [ngClass]="getClasses (product)">Price : {{product.price}}</p> -->
-        <p class="card-text" [ngStyle]="getStyles (product)">Price :
-          {{product.price | currency : 'INR':'Rs ' : '3.2-2' }}</p>
-        <p class="card-text">{{product.releaseDate | date  : 'fullDate'    }}</p>
-        <button type="button" class="btn btn-primary mr-2">Details</button>
-        <button type="button" class="btn btn-success" [disabled]="!product.isActive">Buy Now</button>
-      </div>
-    </div>
+    <app-products [productToBeRendered]="product" [canShowImage]="showImages"></app-products>
   </div>
 </div>
-{{products | json}}
 <ng-template #noBikes>
   <div class="alert alert-warning" role="alert">
     <strong>OOps No Bikes are available</strong>

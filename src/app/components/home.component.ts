@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   template: `
   <h2>Hello From Home</h2>
   <h2 class="text-primary">Hello From Home</h2>
-  <img src="assets/images/map.png" width="50%" />
   <i class="fa fa-user fa-3x"> </i>
   <hr/>
   <app-productlist></app-productlist>
