@@ -11,6 +11,7 @@ import { LowerCasePipe, UpperCasePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { FilterBikesPipe } from "./pipes/filter-bikes.pipe";
 import { ChildComponent } from './components/child/child.component';
+import { AccordianComponent } from './components/accordian/accordian.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -18,7 +19,8 @@ import { ChildComponent } from './components/child/child.component';
     ProductlistComponent,
     IfNullOrEmpty,
     FilterBikesPipe,
-    ChildComponent
+    ChildComponent,
+    AccordianComponent
   ],
   imports: [
     BrowserModule,
