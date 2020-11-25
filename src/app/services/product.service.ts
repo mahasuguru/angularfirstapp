@@ -1,10 +1,9 @@
-// import { Injectable } from '@angular/core';
-import { IProduct } from "../interfaces/product.interface";
-// @Injectable({
-  // providedIn: 'root'
-// })
+ import { Injectable } from '@angular/core';
+import { IProduct } from '../interfaces/product.interface';
+@Injectable()
+
 export class ProductService {
-  private static _instance: ProductService;
+
   private originalProducts: IProduct[] = [
     {
       productName: "Hero Honda CD 100",
@@ -49,7 +48,7 @@ export class ProductService {
     },
   ];
   lastDeletedProduct: string;
-  private constructor() {}
+   constructor() {}
 
 
   getProducts(): IProduct[] {
@@ -62,14 +61,5 @@ export class ProductService {
       this.originalProducts.findIndex((item) => item.productName === bikename),
       1
     );
-  }
-
-  public static GetInstance() {
-    if (this._instance) {
-      return this._instance;
-    } else {
-      this._instance = new ProductService();
-      return this._instance;
-    }
   }
 }

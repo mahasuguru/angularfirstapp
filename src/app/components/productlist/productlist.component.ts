@@ -10,13 +10,12 @@ import { ProductService } from "src/app/services/product.service";
   styleUrls: ['./productlist.component.css']
 })
 export class ProductlistComponent implements OnInit {
-  productService: ProductService;
+
   constructor( private upperCasePipe: UpperCasePipe,
-    private lowerCasePipe: LowerCasePipe,
-    private isNullOrEmpty: IfNullOrEmpty) {
-      this.productService = ProductService.GetInstance();
+    private lowerCasePipe: LowerCasePipe, private productService: ProductService) {
 
      }
+     private isNullOrEmpty: IfNullOrEmpty;
 
     ngOnInit() {
       console.log('Inside On ngOnInit of ProductListComponent');
