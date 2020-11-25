@@ -10,13 +10,15 @@ import { IfNullOrEmpty } from './pipes/if-null-or-empty.pipe';
 import { LowerCasePipe, UpperCasePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { FilterBikesPipe } from "./pipes/filter-bikes.pipe";
+import { ChildComponent } from './components/child/child.component';
 @NgModule({
   declarations: [
     HomeComponent,
     ProductsComponent,
     ProductlistComponent,
     IfNullOrEmpty,
-    FilterBikesPipe
+    FilterBikesPipe,
+    ChildComponent
   ],
   imports: [
     BrowserModule,
