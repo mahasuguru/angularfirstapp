@@ -20,10 +20,10 @@ export class ProductsComponent implements OnInit {
   private counter: number = 0;
 
   ngOnInit(): void {
-    console.log("Inside ProductComponent - ngOnInit()");
+  //  console.log("Inside ProductComponent - ngOnInit()");
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("Inside ngOnChanges of Product Component", changes);
+   // console.log("Inside ngOnChanges of Product Component", changes);
   }
 
   getStyles(product: IProduct) {
@@ -37,7 +37,7 @@ export class ProductsComponent implements OnInit {
     }
   }
   deleteProduct() {
-    console.log("Deleting product ", this.productToBeRendered.productName);
+   // console.log("Deleting product ", this.productToBeRendered.productName);
 
     //HTTP call to the server. Or your complex logic.
     this.onProductDeleted.emit(this.productToBeRendered.productName);
