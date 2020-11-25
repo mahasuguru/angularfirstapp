@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   @Input() canShowImage: boolean;
   @Output() onProductDeleted: EventEmitter<string> = new EventEmitter<string>();
   private counter: number = 0;
-  
+
   ngOnInit(): void {
     console.log("Inside ProductComponent - ngOnInit()");
   }
