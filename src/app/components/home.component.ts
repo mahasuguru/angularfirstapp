@@ -17,6 +17,7 @@ import { ChildComponent } from './child/child.component';
   template: `
   <h2 class="text-primary" #header>Hello From Home</h2>
   <app-productlist></app-productlist>
+  <app-new-list-component></app-new-list-component>
 `,
 })
 export class HomeComponent implements OnInit {
