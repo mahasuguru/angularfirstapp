@@ -27,6 +27,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from "./services/auth.service";
+import { IsLoggedInUserGuardService } from "./guards/is-logged-in-user.service";
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -54,11 +56,12 @@ import { AuthService } from "./services/auth.service";
       {
         path: "products",
         component: ProductlistComponent,
+        canActivate: [IsLoggedInUserGuardService],
       },
       {
         path: "products/:id",
         component: ProductdetailsComponent,
-        canActivate: [ProductDetailsGuardService],
+        canActivate: [ProductDetailsGuardService, IsLoggedInUserGuardService],
         resolve: {
           productData: ProductResolverService,
         },
@@ -90,7 +93,7 @@ import { AuthService } from "./services/auth.service";
     provide: ProductDetailsGuardService,
     useClass: ProductDetailsGuardService,
   },
-  ProductResolverService,  AuthService,],
+  ProductResolverService,  AuthService, IsLoggedInUserGuardService,],
   bootstrap: [HomeComponent]
 })
 export class AppModule { }
