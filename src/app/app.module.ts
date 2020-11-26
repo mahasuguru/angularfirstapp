@@ -24,6 +24,9 @@ import { PagenotfoundComponent } from "./components/pagenotfound/pagenotfound.co
 import { ProductDetailsGuardService } from "./guards/product-details-guard.service";
 import { ProductResolverService } from "./resolvers/product-resolver.service";
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { AuthService } from "./services/auth.service";
 @NgModule({
   declarations: [
     HomeComponent,
@@ -37,7 +40,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ProductdetailsComponent,
     WelcomeComponent,
     PagenotfoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -63,6 +68,14 @@ import { NavbarComponent } from './components/navbar/navbar.component';
         component: WelcomeComponent,
       },
       {
+        path: "register",
+        component: RegisterComponent,
+      },
+      {
+        path: "login",
+        component: LoginComponent,
+      },
+      {
         path: "",
         redirectTo: "welcome",
         pathMatch: "full",
@@ -77,7 +90,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     provide: ProductDetailsGuardService,
     useClass: ProductDetailsGuardService,
   },
-  ProductResolverService,],
+  ProductResolverService,  AuthService,],
   bootstrap: [HomeComponent]
 })
 export class AppModule { }
