@@ -15,7 +15,11 @@ export class ProductService {
    // this.notyf = new Notyf();
   }
 
-
+  getProduct(id: number): Observable<IProduct> {
+    return this.http
+      .get<IProduct>(`${this._baseUrl}/open/products/${id}`)
+      .pipe(catchError(this.handleError));
+  }
   getProducts(): Observable<IProduct[]> {
 
     return this.http

@@ -8,4 +8,5 @@ export interface IProduct {
   imageUrl: string;
   createdDate: string;
   lastUpdatedDate: string;
+   rating: number;
 }
