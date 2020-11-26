@@ -14,7 +14,7 @@ export class AuthService {
   private _baseUrl: string = "http://testapi.techriff.in/api";
 
   isUserLoggedIn() {
-    return false;
+    return true;
   }
 
   login(details){

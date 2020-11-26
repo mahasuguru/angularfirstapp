@@ -1,16 +1,6 @@
 
-import { IProduct } from "../interfaces/product.interface";
-import {
-  AfterViewChecked,
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-} from "@angular/core";
-import { ChildComponent } from './child/child.component';
+import { Component, OnInit } from "@angular/core";
+
 
 @Component({
   selector: 'app-home',
