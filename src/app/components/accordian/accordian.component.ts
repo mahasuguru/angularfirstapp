@@ -24,17 +24,17 @@ export class AccordianComponent implements OnInit, AfterViewInit, AfterViewCheck
   @ContentChildren(ChildComponent) childComp: QueryList<ChildComponent>;
   constructor() { }
   ngAfterViewChecked(): void {
-    console.log("Inside ngAfterViewInit of Acc Componnet ", this.childComp);
+  //  console.log("Inside ngAfterViewInit of Acc Componnet ", this.childComp);
   }
   ngAfterViewInit(): void {
-    console.log(
-      "Inside ngAfterViewInit of Acc Componnet ",
-      this.childComp.toArray()
-    );
+   // console.log(
+    //"Inside ngAfterViewInit of Acc Componnet ",
+    //  this.childComp.toArray()
+   // );
   }
 
   ngOnInit() {
-    console.log("Inside Oninit of Acc Componnet ", this.detailsB);
+   // console.log("Inside Oninit of Acc Componnet ", this.detailsB);
   }
 
 

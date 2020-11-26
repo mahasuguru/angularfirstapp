@@ -1,20 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { IProduct } from 'src/app/interfaces/product.interface';
 import { IfNullOrEmpty } from "src/app/pipes/if-null-or-empty.pipe";
 import { LowerCasePipe, UpperCasePipe } from "@angular/common";
 import { ProductService } from "src/app/services/product.service";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',
   styleUrls: ['./productlist.component.css']
 })
-export class ProductlistComponent implements OnInit {
-
+export class ProductlistComponent implements OnInit, OnDestroy{
+  private ngUnsubscribe: Subject<any> = new Subject();
   constructor( private upperCasePipe: UpperCasePipe,
     private lowerCasePipe: LowerCasePipe, private productService: ProductService) {
 
      }
+     ngOnDestroy(): void {
+      this.ngUnsubscribe.next();
+      this.ngUnsubscribe.complete();
+    }
      showImages: boolean = true;
   searchText: string = "";
   selectedSort: string = "";
@@ -26,7 +32,10 @@ export class ProductlistComponent implements OnInit {
       this.loadInitialData();
     }
     private loadInitialData() {
-      this.productService.getProducts().subscribe(
+      this.productService
+      .getProducts()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
         (data: IProduct[]) => {
           console.log(data);
           this.products = data;
