@@ -83,7 +83,8 @@ export class ProductlistComponent implements OnInit {
   }
 
   onProductDeleted(productName: string) {
-   this.productService.deleteProduct(productName);
+    console.log("Product Deleted !", event);
+    this.loadInitialData();
 
   }
 

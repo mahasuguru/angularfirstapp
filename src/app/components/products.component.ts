@@ -58,10 +58,18 @@ export class ProductsComponent implements OnInit {
       }
     );
   }
-  deleteProduct() {
-   // console.log("Deleting product ", this.productToBeRendered.productName);
-
-    //HTTP call to the server. Or your complex logic.
-    this.onProductDeleted.emit(this.product.productName);
+  deleteProduct(id: number) {
+    this.productService.deleteProduct(id).subscribe(
+      (data: IProduct) => {
+        console.log("Deleted", data);
+        this.utilityService.showError(
+          `${data.productName} is deleted successfully`
+        );
+        this.onProductDeleted.emit(data.productName);
+      },
+      (error) => {
+        console.log("ERROR -", error);
+      }
+    );
   }
 }

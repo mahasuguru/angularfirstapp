@@ -32,8 +32,8 @@ export class ProductService {
       );
     }
   }
-  deleteProduct(bikename: string): void {
-    this.lastDeletedProduct = bikename;
-    // this.UtilityService.showError(`${bikename} is deleted!`);
+  deleteProduct(id: number): Observable<IProduct> {
+    return this.http.delete<IProduct>(`${this._baseUrl}/open/products/${id}`);
+  
   }
 }
