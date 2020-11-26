@@ -15,59 +15,80 @@ export class ProductlistComponent implements OnInit {
     private lowerCasePipe: LowerCasePipe, private productService: ProductService) {
 
      }
-     private isNullOrEmpty: IfNullOrEmpty;
+     showImages: boolean = true;
+  searchText: string = "";
+  selectedSort: string = "";
+  products: IProduct[];
+  actualProducts: any[];
 
     ngOnInit() {
-      console.log('Inside On ngOnInit of ProductListComponent');
-      this.products =   this.productService.getProducts();
-      this.actualBikes = [...this.products];
-      this.loadData();
+
+      this.loadInitialData();
     }
-  showImages: boolean = false;
-  pageTitle: string = 'Bike List';
-  searchText: string = "";
+    private loadInitialData() {
+      this.productService.getProducts().subscribe(
+        (data: IProduct[]) => {
+          console.log(data);
+          this.products = data;
+          this.actualProducts = [...this.products];
+        },
+        (error) => {
+          console.log("ERROR -", error);
+        }
+      );
+    }
 
-
-  products: IProduct[];
-  actualBikes: IProduct[];
   getTitle(): string {
     return 'Hello from Method';
   }
     // showImage(getImage('path', 'format), 'thumbnail');
-  toggleImages(): void {
-    this.showImages = !this.showImages;
-    if (this.showImages) {
-      this.pageTitle = this.isNullOrEmpty.transform(
-        this.upperCasePipe.transform(this.pageTitle),
-        "N/A"
-      );
-    } else {
-      this.pageTitle = this.isNullOrEmpty.transform(
-        this.lowerCasePipe.transform(this.pageTitle),
-        "N/A"
-      );
+    toggleImage(): void {
+      this.showImages = !this.showImages;
     }
-  }
   changeName() {
     this.products[0].productName = "Nexon";
   }
-  mouseEnterEvent() {}
-  filterBikes() {
-    if (this.searchText) {
-      this.products = this.actualBikes.filter((x) =>
-        x.productName.toLowerCase().includes(this.searchText.toLowerCase())
-      );
-    } else {
-      this.products = this.actualBikes;
+  filterData() {
+    this.products = this.actualProducts.filter((filter) =>
+      filter.productName.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+    this.sortBikesByModel();
+  }
+  sortBikes(event): void {
+    let sortValue = event.target.value;
+    if (sortValue === "name") {
+      this.products = this.products.sort((a: IProduct, b: IProduct) => {
+        if (a.productName > b.productName) return 1;
+        else if (b.productName > a.productName) return -1;
+        else return 0;
+      });
+    } else if (sortValue == "price") {
+      this.products = this.products.sort((a: IProduct, b: IProduct) => {
+        return a.price - b.price;
+      });
     }
   }
-  onSuccessfullyDeleted(productName: string) {
-    console.log("Inside Product List Componnet ", productName);
-    this.productService.removeBike(productName);
-    this.loadData();
+  sortBikesByModel() {
+    if (this.selectedSort === "name") {
+      this.products = this.products.sort((a: IProduct, b: IProduct) => {
+        if (a.productName > b.productName) return 1;
+        else if (b.productName > a.productName) return -1;
+        else return 0;
+      });
+    } else if (this.selectedSort == "price") {
+      this.products = this.products.sort((a: IProduct, b: IProduct) => {
+        return a.price - b.price;
+      });
+    }
   }
-  private loadData() {
-    this.products = this.productService.getProducts();
-    this.actualBikes = [...this.products];
+
+  onProductDeleted(productName: string) {
+   this.productService.deleteProduct(productName);
+
+  }
+
+  onStatusChanged(event) {
+    console.log("Status Of Product Changed !", event);
+    this.loadInitialData();
   }
 }

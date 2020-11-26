@@ -1,17 +1,19 @@
-<div class="card text-left">
-  <img class="card-img-top" *ngIf="canShowImage" [src]="productToBeRendered.imageUrl"
-    [title]="productToBeRendered.productName" [style.padding.px]="'5'" alt="">
-  <div class="card-body">
-    <h4 class="card-title">{{productToBeRendered.productName | uppercase}}</h4>
-    <p class="card-text">Description : {{productToBeRendered.description | nullOrEmpty :  'Not Available' | uppercase}}
-    </p>
-    <p class="card-text" [ngStyle]="getStyles (productToBeRendered)">Price :
-      {{productToBeRendered.price | currency : 'INR':'Rs ' : '3.2-2' }}</p>
-    <p class="card-text">Released On : {{productToBeRendered.releaseDate | date : 'fullDate'}}</p>
-
-    <button type="button" class="btn btn-primary mr-2">Details</button>
-    <button type="button" class="btn btn-success mr-2" [disabled]="!productToBeRendered.isActive">Buy Now</button>
-    <button type="button" class="btn btn-danger" [disabled]="!productToBeRendered.isActive"
-      (click)="deleteProduct()">Delete</button>
+<app-accordian [title]="product.productName">
+  <div class="accordianBody">
+    <p class="card-text">Des : {{product.description | nullOrEmpty : 'N/A'}}</p>
+    <p class="card-text">Released On : {{product.releaseDate | date : 'fullDate'}}</p>
+    <p class="card-text" [ngStyle]="getPriceStyles(product)">Price :
+      {{product.price | currency :'INR' : 'Rs ' : '2.2-2' }}</p>
   </div>
-</div>
+  <hr />
+  <div class="accordianFooter">
+
+    <a href="#" class="btn btn-primary mr-1 btn-sm" #detailsButton>Details</a>
+    <button href="#" class="btn btn-success mr-1 btn-sm" [disabled]="product.isActive">Buy</button>
+    <button href="#" class="btn btn-danger mr-1 btn-sm" (click)="deleteProduct()">Delete</button>
+    <button href="#" class="btn btn-info mr-1 btn-sm" (click)="changeStatus(product.productId,'deactivate')"
+      *ngIf="product.isActive">Deactivate</button>
+    <button href="#" class="btn btn-info mr-1 btn-sm" (click)="changeStatus(product.productId,'reactivate')"
+      *ngIf="!product.isActive">Activate</button>
+  </div>
+</app-accordian>

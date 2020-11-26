@@ -1,33 +1,42 @@
-<h2>{{pageTitle}}</h2>
-<hr>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-3">
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Search " [(ngModel)]="searchText" (input)="filterBikes()">
+      <input type="text" class="form-control" (input)="filterData()" [(ngModel)]="searchText" placeholder="Search Text">
     </div>
   </div>
   <div class="col-md-3">
-    <button type="button" class="btn btn-info" (click)="changeName()">Change Name</button>
+    <div class="form-group">
+      <select class="form-control" (change)="sortBikesByModel()" [(ngModel)]="selectedSort">
+        <!-- <select class="form-control" (change)="sortBikes($event)"> -->
+        <option value="">Select</option>
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+      </select>
+    </div>
   </div>
-  <div class="col-md-3">
-    <button type="button" class="btn btn-warning float-right" (click)="toggleImages()">{{showImages ? 'Hide' : 'Show'}}
-      Images</button>
+  <div class="col-md-6">
+    <button type="button" class="btn btn-primary" (click)="changeName()">Change Name</button>
+    <button type="button" class="btn btn-primary  float-right"
+      (click)="toggleImage()">{{showImages ? "Hide Images" :"Show Images"}}</button>
   </div>
 </div>
 <div class="row">
   <div class="col-md-12">
-    Filter By : {{searchText }}
+    <h4>Filter By : {{searchText}}</h4>
   </div>
 </div>
-<hr>
-<div class="row" *ngIf="products && products.length; else noBikes" (mousemove)="mouseEnterEvent()">
-  <div class="col-md-4 mt-3" *ngFor="let product of products; let i = index;">
-    <app-products [productToBeRendered]="product" [canShowImage]="showImages"
-    (onProductDeleted)="onSuccessfullyDeleted($event)"></app-products>
+
+<div class="row" *ngIf="products && products.length; else noProducts">
+  <div class="col-md-4 mt-5" *ngFor="let product of products ; let i= index">
+
+    <app-products [product]="product" [showImages]="showImages" (onDelete)="onProductDeleted($event)"
+      (onStatusChanged)="onStatusChanged($event)">
+    </app-products>
+
   </div>
 </div>
-<ng-template #noBikes>
-  <div class="alert alert-warning" role="alert">
-    <strong>OOps No Bikes are available</strong>
+<ng-template #noProducts>
+  <div class="alert alert-danger" role="alert">
+    <strong>OOPS !! We do not have any products.</strong>
   </div>
 </ng-template>

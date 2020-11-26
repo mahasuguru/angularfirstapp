@@ -1,68 +1,39 @@
  import { Injectable } from '@angular/core';
 import { IProduct } from '../interfaces/product.interface';
 import { UtilityService } from "./utility.service";
-
-@Injectable()
-
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+@Injectable({
+  providedIn: "root",
+})
 export class ProductService {
-
-  private originalProducts: IProduct[] = [
-    {
-      productName: "Hero Honda CD 100",
-      description: "Most popular Bike of India",
-      releaseDate: "10-08-1990",
-      price: 100,
-      isActive: true,
-      imageUrl: "https://via.placeholder.com/150?text=CD100SS",
-    },
-    {
-      productName: "Honda Hornet",
-      description: "A sports Bike",
-      releaseDate: "10-08-2010",
-      price: 200,
-      isActive: true,
-      imageUrl: "https://via.placeholder.com/150?text=Hornet",
-    },
-    {
-      productName: "Super splendor",
-      description: null,
-      releaseDate: "10-08-1980",
-      price: 75,
-      isActive: true,
-
-      imageUrl: "https://via.placeholder.com/150?text=Splendor",
-    },
-    {
-      productName: "Yamaha RX 100",
-      description: "Nostalgic !",
-      releaseDate: "10-08-1987",
-      price: 122,
-      isActive: false,
-      imageUrl: "https://via.placeholder.com/150?text=RX100",
-    },
-    {
-      productName: "Bajaj Pulsar",
-      description: "",
-      releaseDate: "10-08-1920",
-      price: 9,
-      isActive: false,
-      imageUrl: "https://via.placeholder.com/150?text=Pulsar",
-    },
-  ];
   lastDeletedProduct: string;
-   constructor(private UtilityService: UtilityService) {}
-
-
-  getProducts(): IProduct[] {
-    console.log("Inside GETPRODUCTS ", this.originalProducts);
-    return this.originalProducts;
+   // notyf: Notyf;
+  private _baseUrl: string = "http://testapi.techriff.in/api";
+  constructor(private http: HttpClient) {
+   // this.notyf = new Notyf();
   }
-  removeBike(bikename: string): void {
+
+
+  getProducts(): Observable<IProduct[]> {
+
+    return this.http.get<IProduct[]>(`${this._baseUrl}/open/products`);
+  }
+  changeStatus(id: number, status: string): Observable<IProduct> {
+    if (status == "reactivate") {
+      return this.http.post<IProduct>(
+        `${this._baseUrl}/open/products/${id}/reactivate`,
+        null
+      );
+    } else {
+      return this.http.post<IProduct>(
+        `${this._baseUrl}/open/products/${id}/deactivate`,
+        null
+      );
+    }
+  }
+  deleteProduct(bikename: string): void {
     this.lastDeletedProduct = bikename;
-    this.originalProducts.splice(
-      this.originalProducts.findIndex((item) => item.productName === bikename),
-      1
-    );
-    this.UtilityService.showError(`${bikename} is deleted!`);
+    // this.UtilityService.showError(`${bikename} is deleted!`);
   }
 }

@@ -13,7 +13,7 @@ export class NewListComponentComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.newProducts = this.productService.getProducts();
+    // this.newProducts = this.productService.getProducts();
     this.reloadData();
   }
   reloadData() {
