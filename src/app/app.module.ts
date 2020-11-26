@@ -28,7 +28,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from "./services/auth.service";
 import { IsLoggedInUserGuardService } from "./guards/is-logged-in-user.service";
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -52,6 +52,7 @@ import { IsLoggedInUserGuardService } from "./guards/is-logged-in-user.service";
     FormsModule,
     HttpClientModule,
     NgHttpLoaderModule.forRoot(),
+    ReactiveFormsModule,
     RouterModule.forRoot([
       {
         path: "products",
