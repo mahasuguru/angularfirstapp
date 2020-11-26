@@ -23,6 +23,7 @@ import { ProductdetailsComponent } from "./components/productdetails/productdeta
 import { PagenotfoundComponent } from "./components/pagenotfound/pagenotfound.component";
 import { ProductDetailsGuardService } from "./guards/product-details-guard.service";
 import { ProductResolverService } from "./resolvers/product-resolver.service";
+import { NavbarComponent } from './components/navbar/navbar.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -35,7 +36,8 @@ import { ProductResolverService } from "./resolvers/product-resolver.service";
     NewListComponentComponent,
     ProductdetailsComponent,
     WelcomeComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
