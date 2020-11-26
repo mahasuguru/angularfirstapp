@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
@@ -16,7 +17,10 @@ import { NewListComponentComponent } from './components/new-list-component/new-l
 import { ProductService } from "./services/product.service";
 import { UtilityService } from "./services/utility.service";
 import { NgHttpLoaderModule } from "ng-http-loader";
-
+import { RouterModule } from "@angular/router";
+import { WelcomeComponent } from "./components/welcome/welcome.component";
+import { ProductdetailsComponent } from "./components/productdetails/productdetails.component";
+import { PagenotfoundComponent } from "./components/pagenotfound/pagenotfound.component";
 @NgModule({
   declarations: [
     HomeComponent,
@@ -26,7 +30,10 @@ import { NgHttpLoaderModule } from "ng-http-loader";
     FilterBikesPipe,
     ChildComponent,
     AccordianComponent,
-    NewListComponentComponent
+    NewListComponentComponent,
+    ProductdetailsComponent,
+    WelcomeComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +41,29 @@ import { NgHttpLoaderModule } from "ng-http-loader";
     FormsModule,
     HttpClientModule,
     NgHttpLoaderModule.forRoot(),
+    RouterModule.forRoot([
+      {
+        path: "products",
+        component: ProductlistComponent,
+      },
+      {
+        path: "products/:id",
+        component: ProductdetailsComponent,
+      },
+      {
+        path: "welcome",
+        component: WelcomeComponent,
+      },
+      {
+        path: "",
+        redirectTo: "welcome",
+        pathMatch: "full",
+      },
+      {
+        path: "**",
+        component: PagenotfoundComponent,
+      },
+    ]),
   ],
   providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty, ProductService, UtilityService],
   bootstrap: [HomeComponent]

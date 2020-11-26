@@ -16,8 +16,8 @@ import { ChildComponent } from './child/child.component';
   selector: 'app-home',
   template: `
    <ng-http-loader></ng-http-loader>
-  <h2 class="text-primary" #header>Hello From Home</h2>
-  <app-productlist></app-productlist>
+   <h2 class="text-primary">Product Management APP</h2>
+    <router-outlet> </router-outlet>
 `,
 })
 export class HomeComponent implements OnInit {
