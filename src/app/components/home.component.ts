@@ -15,6 +15,7 @@ import { ChildComponent } from './child/child.component';
 @Component({
   selector: 'app-home',
   template: `
+   <ng-http-loader></ng-http-loader>
   <h2 class="text-primary" #header>Hello From Home</h2>
   <app-productlist></app-productlist>
 `,

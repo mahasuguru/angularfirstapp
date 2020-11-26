@@ -15,6 +15,7 @@ import { AccordianComponent } from './components/accordian/accordian.component';
 import { NewListComponentComponent } from './components/new-list-component/new-list-component.component';
 import { ProductService } from "./services/product.service";
 import { UtilityService } from "./services/utility.service";
+import { NgHttpLoaderModule } from "ng-http-loader";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UtilityService } from "./services/utility.service";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgHttpLoaderModule.forRoot(),
   ],
   providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty, ProductService, UtilityService],
   bootstrap: [HomeComponent]
