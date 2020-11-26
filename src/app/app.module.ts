@@ -5,18 +5,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 // import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
-import { ProductsComponent } from './components/products.component';
-import { ProductlistComponent } from './components/productlist/productlist.component';
 import { IfNullOrEmpty } from './pipes/if-null-or-empty.pipe';
 import { LowerCasePipe, UpperCasePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { FilterBikesPipe } from "./pipes/filter-bikes.pipe";
 import { ProductService } from "./services/product.service";
 import { UtilityService } from "./services/utility.service";
 import { NgHttpLoaderModule } from "ng-http-loader";
 import { RouterModule } from "@angular/router";
 import { WelcomeComponent } from "./components/welcome/welcome.component";
-import { ProductdetailsComponent } from "./components/productdetails/productdetails.component";
 import { PagenotfoundComponent } from "./components/pagenotfound/pagenotfound.component";
 import { ProductDetailsGuardService } from "./guards/product-details-guard.service";
 import { ProductResolverService } from "./resolvers/product-resolver.service";
@@ -26,14 +22,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from "./services/auth.service";
 import { IsLoggedInUserGuardService } from "./guards/is-logged-in-user.service";
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductsModule } from './modules/products/products.module';
 @NgModule({
   declarations: [
     HomeComponent,
-    ProductsComponent,
-    ProductlistComponent,
-    IfNullOrEmpty,
-    FilterBikesPipe,
-    ProductdetailsComponent,
     WelcomeComponent,
     PagenotfoundComponent,
     NavbarComponent,
@@ -48,19 +40,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgHttpLoaderModule.forRoot(),
     ReactiveFormsModule,
     RouterModule.forRoot([
-      {
-        path: "products",
-        component: ProductlistComponent,
-        canActivate: [IsLoggedInUserGuardService],
-      },
-      {
-        path: "products/:id",
-        component: ProductdetailsComponent,
-        canActivate: [ProductDetailsGuardService, IsLoggedInUserGuardService],
-        resolve: {
-          productData: ProductResolverService,
-        },
-      },
       {
         path: "welcome",
         component: WelcomeComponent,
@@ -83,6 +62,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         component: PagenotfoundComponent,
       },
     ]),
+    ProductsModule,
   ],
   providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty, ProductService, UtilityService, {
     provide: ProductDetailsGuardService,
