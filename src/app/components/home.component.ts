@@ -27,6 +27,7 @@ import { ChildComponent } from './child/child.component';
         </li>
       </ul>
     </nav>
+    <hr/>
     <router-outlet> </router-outlet>
 `,
 })
