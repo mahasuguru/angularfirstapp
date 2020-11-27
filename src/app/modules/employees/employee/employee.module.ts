@@ -11,11 +11,11 @@ import { SharedModule } from "src/app/shared/shared.module";
     CommonModule,
     RouterModule.forChild([
       {
-        path: "employees",
+        path: "",
         component: EmpListComponent,
       },
       {
-        path: "employees/details",
+        path: "details",
         component: EmployeeDetailsComponent,
       },
     ]),

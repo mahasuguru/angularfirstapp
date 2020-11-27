@@ -23,12 +23,12 @@ import { SharedModule } from "src/app/shared/shared.module";
     FormsModule,
     RouterModule.forChild([
       {
-        path: "products",
+        path: "",
         component: ProductlistComponent,
         canActivate: [IsLoggedInUserGuardService],
       },
       {
-        path: "products/:id",
+        path: ":id",
         component: ProductdetailsComponent,
         canActivate: [IsLoggedInUserGuardService, ProductDetailsGuardService],
         resolve: {
