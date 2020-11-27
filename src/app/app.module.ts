@@ -23,6 +23,9 @@ import { AuthService } from "./services/auth.service";
 import { IsLoggedInUserGuardService } from "./guards/is-logged-in-user.service";
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsModule } from './modules/products/products.module';
+import { EmployeeModule } from './modules/employees/employee/employee.module';
+import { SharedModule } from './shared/shared.module';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -30,7 +33,8 @@ import { ProductsModule } from './modules/products/products.module';
     PagenotfoundComponent,
     NavbarComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -63,6 +67,8 @@ import { ProductsModule } from './modules/products/products.module';
       },
     ]),
     ProductsModule,
+    EmployeeModule,
+    SharedModule,
   ],
   providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty, ProductService, UtilityService, {
     provide: ProductDetailsGuardService,
