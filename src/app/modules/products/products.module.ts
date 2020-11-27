@@ -5,7 +5,6 @@ import { ProductsComponent } from "..//components/products.component";
 import { ProductdetailsComponent } from "..//components/productdetails/productdetails.component";
 import { IfNullOrEmpty } from "src/app/pipes/if-null-or-empty.pipe";
 import { FilterBikesPipe } from "src/app/pipes/filter-bikes.pipe";
-import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { IsLoggedInUserGuardService } from "src/app/guards/is-logged-in-user.service";
 import { ProductDetailsGuardService } from "src/app/guards/product-details-guard.service";
@@ -20,7 +19,6 @@ import { SharedModule } from "src/app/shared/shared.module";
   ],
   imports: [
     CommonModule,
-    FormsModule,
     RouterModule.forChild([
       {
         path: "",
