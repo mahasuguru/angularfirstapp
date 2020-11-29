@@ -4,6 +4,7 @@ import { UtilityService } from "./utility.service";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { AddProduct } from "../interfaces/add-product";
 @Injectable({
   providedIn: "root",
 })
@@ -40,5 +41,7 @@ export class ProductService {
   deleteProduct(id: number): Observable<IProduct> {
     return this.http.delete<IProduct>(`${this._baseUrl}/products/${id}`);
   }
-
+  createNewProduct(product: AddProduct): Observable<IProduct> {
+    return this.http.post<IProduct>(`${this._baseUrl}/products`, product);
+  }
 }

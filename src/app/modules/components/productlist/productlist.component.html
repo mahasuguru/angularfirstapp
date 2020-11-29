@@ -18,6 +18,9 @@
     <button type="button" class="btn btn-primary" (click)="changeName()">Change Name</button>
     <button type="button" class="btn btn-primary  float-right"
       (click)="toggleImage()">{{showImages ? "Hide Images" :"Show Images"}}</button>
+      <button type="button" class="btn btn-default btn-primary float-right mr-2"
+      [routerLink]="['/products/create']">Create
+      New</button>
   </div>
 </div>
 <div class="row">

@@ -21,7 +21,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthService } from "./services/auth.service";
 import { IsLoggedInUserGuardService } from "./guards/is-logged-in-user.service";
-import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsModule } from './modules/products/products.module';
 import { EmployeeModule } from './modules/employees/employee/employee.module';
  import { SharedModule } from './shared/shared.module';
@@ -43,7 +42,6 @@ import { EmployeeModule } from './modules/employees/employee/employee.module';
     FormsModule,
     HttpClientModule,
     NgHttpLoaderModule.forRoot(),
-    ReactiveFormsModule,
     RouterModule.forRoot([
       {
         path: "welcome",

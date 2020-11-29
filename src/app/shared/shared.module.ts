@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [IfNullOrEmpty, FilterBikesPipe],
-  imports: [FormsModule, FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
 
-  exports: [IfNullOrEmpty, FilterBikesPipe,  FormsModule, FormsModule],
+  exports: [IfNullOrEmpty, FilterBikesPipe,  FormsModule, ReactiveFormsModule],
 })
 export class SharedModule {}

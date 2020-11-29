@@ -10,12 +10,13 @@ import { IsLoggedInUserGuardService } from "src/app/guards/is-logged-in-user.ser
 import { ProductDetailsGuardService } from "src/app/guards/product-details-guard.service";
 import { ProductResolverService } from "src/app/resolvers/product-resolver.service";
 import { SharedModule } from "src/app/shared/shared.module";
+import { CreateProductComponent } from '..//components/create-product/create-product.component';
 @NgModule({
   declarations: [
     ProductlistComponent,
     ProductsComponent,
     ProductdetailsComponent,
-
+    CreateProductComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +25,10 @@ import { SharedModule } from "src/app/shared/shared.module";
         path: "",
         component: ProductlistComponent,
         canActivate: [IsLoggedInUserGuardService],
+      },
+      {
+        path: "create",
+        component: CreateProductComponent,
       },
       {
         path: ":id",
