@@ -23,10 +23,6 @@ export class IsLoggedInUserGuardService implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
     console.log("IsLoggedInUserGuardService");
-    if (this.authService.isUserLoggedIn()) {
-      return true;
-    } else {
-      this.route.navigate(["/login"]);
-    }
-  }
+  return this.authService.getLoggedInUserData() !== null;
+}
 }

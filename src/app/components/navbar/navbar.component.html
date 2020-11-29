@@ -15,15 +15,15 @@
       <a class="nav-link" [routerLink]="['/employees/details']" [routerLinkActive]="['active']">Emp Details</a>
     </li>
   </ul>
-  <ul class="navbar-nav"  *ngIf="isLoggedInUser">
+  <ul class="navbar-nav"  *ngIf="loggedInUser">
     <li class="nav-item">
-      <a class="nav-link" href="#"> Hello Maha </a>
+      <a class="nav-link" href="#"> Hello  {{loggedInUser.userName}}  </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link"  [routerLink]="['/login']" [routerLinkActive]="['active']"> LogOut </a>
+      <a class="nav-link"  href="#" (click)="logout()"> LogOut </a>
     </li>
   </ul>
-  <ul class="navbar-nav" *ngIf="!isLoggedInUser">
+  <ul class="navbar-nav" *ngIf="!loggedInUser">
     <li class="nav-item">
       <a class="nav-link" [routerLink]="['/register']" [routerLinkActive]="['active']">Register</a>
     </li>
