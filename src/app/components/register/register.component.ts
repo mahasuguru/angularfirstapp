@@ -29,11 +29,19 @@ export class RegisterComponent implements OnInit {
   loginForm: FormGroup;
   isSubmitted  =  false;
   ngOnInit(): void {
-    this.registerForm = new FormGroup({
+    this.registerForm = this.fb.group({
+      fullName: [
+        "maha",
+        [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
+      ],
+      emailAddress: ["", [Validators.required, Validators.email]],
+      isSubscribe: false,
+    });
+  /*  this.registerForm = new FormGroup({
       fullName: new FormControl(),
       emailAddress: new FormControl(),
       isSubscribe: new FormControl(false),
-    });
+    }); */
   }
 
 
@@ -43,7 +51,7 @@ submitForm() {
 fillWithDummyData() {
   //API Call
   let datafromservice = {
-    fullName: "maha",
+    fullName: "mahalakshmi",
     emailAddress: "maha@gmail.com",
     is_Subscribed: true,
   };
