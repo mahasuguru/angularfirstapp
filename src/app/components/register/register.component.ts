@@ -8,35 +8,55 @@ import {
   UrlTree,
 } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
-
+import { IRegister } from "src/app/interfaces/register.interface";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  data: IRegister = {
+    fullName: "John Smith",
+    emailAddress: "",
+    country: "",
+    gender: "",
+    isSubscribe: false,
+    password: "",
+  };
 
+  registerForm: FormGroup;
   constructor(private fb: FormBuilder, private route: Router, private authService: AuthService) { }
   loginForm: FormGroup;
   isSubmitted  =  false;
   ngOnInit(): void {
-    this.loginForm  =  this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmpassword: ['', Validators.required]
-  });
+    this.registerForm = new FormGroup({
+      fullName: new FormControl(),
+      emailAddress: new FormControl(),
+      isSubscribe: new FormControl(false),
+    });
   }
-  get formControls() { return this.loginForm.controls; }
-  onSubmit(form: FormGroup) {
-    console.log(this.loginForm.value);
-   this.isSubmitted = true;
-    if(this.loginForm.invalid){
-      return;
-    }
 
-    this.authService.login(this.loginForm.value).subscribe((data => {
-      console.log(data);
-    }));
-    this.route.navigateByUrl('/login');
-  }
+
+submitForm() {
+  console.log("Form SUbmitted ", this.registerForm);
+}
+fillWithDummyData() {
+  //API Call
+  let datafromservice = {
+    fullName: "maha",
+    emailAddress: "maha@gmail.com",
+    is_Subscribed: true,
+  };
+  console.log("Fetching Data");
+  this.registerForm.patchValue({
+    fullName: datafromservice.fullName,
+    emailAddress: datafromservice.emailAddress,
+  });
+  this.registerForm.setValue({
+    fullName: datafromservice.fullName,
+    emailAddress: datafromservice.emailAddress,
+   isSubscribe:  datafromservice.is_Subscribed,
+
+  });
+}
 }
