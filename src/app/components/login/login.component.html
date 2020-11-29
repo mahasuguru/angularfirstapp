@@ -1,45 +1,27 @@
-<form #loginform='ngForm' (ngSubmit)="submitform(loginform)">
-  <div class="form-group">
-    <label >name</label>
-    <input type="text" class="form-control"   placeholder="Enter name" name='fullname' [(ngModel)]= 'details.name' #name1=ngModel required
-    pattern="B.*" minlength="4" maxlength="8" [class.form-error-element]="name1.invalid && loginform.submitted">
-    <div class="text-danger" *ngIf="name1.invalid && loginform.submitted" [hidden]="name1.valid || name1.untouched">
-      Please enter a valida name (Should start with
-      B and character lengths in between 4-8)</div>
-  </div>
+<form class="mt-3" #form="ngForm" (ngSubmit)="submitForm(form)">
   <div class="form-group">
     <label for="exampleInputEmail1">Email address</label>
-    <input type="email"  class="form-control" name='email' [(ngModel)]= 'details.emailaddress' placeholder="Enter email" #email=ngModel  minlength="4" required
-    [class.form-error-element]="email.invalid && loginform.submitted">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    <div class="text-danger" *ngIf="email.invalid && loginform.submitted && email.errors.required"
+    <input type="email" class="form-control" id="exampleInputEmail1" name="emailAddress" placeholder="Enter email"
+      required [(ngModel)]="data.emailAddress" #email="ngModel"
+      [class.form-error-element]="email.invalid && form.submitted" email>
+
+    <div class="text-danger" *ngIf="email.invalid && form.submitted && email.errors.required"
       [hidden]="email.valid || email.untouched">
       Email is required</div>
-    <div class="text-danger"
-      *ngIf="email.invalid && loginform.submitted && email.errors?.minlength?.actualLength < email.errors?.minlength?.requiredLength"
+
+    <div class="text-danger" *ngIf="email.invalid && form.submitted && email.errors.email"
       [hidden]="email.valid || email.untouched">
-      Min 4 characters are required</div>
-      <h6 class="text-info">{{email.errors | json}}</h6>
+      Please type in a valid email</div>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" name='password' [(ngModel)]= 'details.password' placeholder="Password" #password=ngModel>
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" name='subsrcibe' [(ngModel)]= 'details.subsrcibe' #subscribe=ngModel>
-    <label class="form-check-label" for="exampleCheck1">subsrcibe</label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="gender" value='Male' id="exampleRadios2" [(ngModel)]= 'details.gender' #gender=ngModel>
-    <label class="form-check-label" for="exampleRadios2">
-      Male
-    </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="gender" value='Female' id="exampleRadios3" [(ngModel)]= 'details.gender' #gender=ngModel>
-    <label class="form-check-label" for="exampleRadios3">
-     Female
-    </label>
+    <input type="password" class="form-control" name="password" [(ngModel)]="data.password" id="exampleInputPassword1"
+      placeholder="Password" #password="ngModel" [class.form-error-element]="password.invalid && form.submitted"
+      required>
+
+    <div class="text-danger" *ngIf="password.invalid && form.submitted && password.errors.required"
+      [hidden]="email.valid || email.untouched">
+      Password is required</div>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
