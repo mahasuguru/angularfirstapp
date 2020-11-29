@@ -1,7 +1,7 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 // import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ProductsModule } from './modules/products/products.module';
 import { EmployeeModule } from './modules/employees/employee/employee.module';
  import { SharedModule } from './shared/shared.module';
+ import { WiproHttpInterceptor } from "./services/http-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -78,11 +79,19 @@ import { EmployeeModule } from './modules/employees/employee/employee.module';
   //  EmployeeModule,
    SharedModule,
   ],
-  providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty, ProductService, UtilityService, {
+  providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty,  {
+    provide: ProductService,
+    useClass: ProductService,
+  }, UtilityService, {
     provide: ProductDetailsGuardService,
     useClass: ProductDetailsGuardService,
   },
-  ProductResolverService,  AuthService, IsLoggedInUserGuardService,],
+  ProductResolverService,  AuthService, IsLoggedInUserGuardService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: WiproHttpInterceptor,
+    multi: true,
+  },],
   bootstrap: [HomeComponent]
 })
 export class AppModule { }
