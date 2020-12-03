@@ -67,6 +67,12 @@ export class RegisterComponent implements OnInit {
       isSubscribe: false,
       rating: [null, [rangeValidator(1, 5)]],
     });
+    let notifyControl = this.registerForm.get("notificationMedium");
+    notifyControl.valueChanges.subscribe((data) => {
+      console.log("valueChanges", data);
+      this.notifyUser(data);
+    });
+
   /*  this.registerForm = new FormGroup({
       fullName: new FormControl(),
       emailAddress: new FormControl(),
