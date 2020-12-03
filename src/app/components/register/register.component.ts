@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { AbstractControl,FormBuilder, FormGroup, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -9,6 +9,33 @@ import {
 } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 import { IRegister } from "src/app/interfaces/register.interface";
+function rangeValidator(min: number, max: number): ValidatorFn {
+  return (control: AbstractControl): { [key: string]: boolean } | null => {
+    console.log("Control - ", control);
+    if (
+      control !== null &&
+      (isNaN(control.value) || control.value < min || control.value > max)
+    ) {
+      return { range: true };
+    }
+    //If validation rule passes, we return null
+    return null;
+  };
+}
+
+// function rangeValidator(
+//   control: AbstractControl
+// ): { [key: string]: boolean } | null {
+//   console.log("Control - ", control);
+//   if (
+//     control !== null &&
+//     (isNaN(control.value) || control.value < 1 || control.value > m5ax)
+//   ) {
+//     return { range: true };
+//   }
+//   //If validation rule passes, we return null
+//   return null;
+// };
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -38,6 +65,7 @@ export class RegisterComponent implements OnInit {
       phoneNumber: "",
       notificationMedium: "email",
       isSubscribe: false,
+      rating: [null, [rangeValidator(1, 5)]],
     });
   /*  this.registerForm = new FormGroup({
       fullName: new FormControl(),
