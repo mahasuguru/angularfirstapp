@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl,FormBuilder, FormGroup, FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl,FormBuilder, FormGroup, FormControl, ValidatorFn, Validators,FormArray } from '@angular/forms';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     emailAddress: "",
     country: "",
     gender: "",
-    isSubscribe: false,
+    isSubscribe: true,
     password: "",
   };
 
@@ -67,8 +67,9 @@ export class RegisterComponent implements OnInit {
       ),
       phoneNumber: "",
       notificationMedium: "email",
-      isSubscribe: false,
+      isSubscribe: this.data.isSubscribe,
       rating: [null, [rangeValidator(1, 5)]],
+      addressArray: this.fb.array([this.buildAddressGroup()]),
     });
     let notifyControl = this.registerForm.get("notificationMedium");
     notifyControl.valueChanges.subscribe((data) => {
@@ -83,7 +84,21 @@ export class RegisterComponent implements OnInit {
     }); */
   }
 
-
+  addAddress() {
+    this.registerForm
+      .get("addressArray")
+      ["controls"].push(this.buildAddressGroup());
+  }
+  buildAddressGroup(): FormGroup {
+    return this.fb.group({
+      addressType: "",
+      address1: ["", [Validators.required]],
+      address2: "",
+      state: "",
+      city: "",
+      zip: "",
+    });
+  }
 submitForm() {
   console.log("Form SUbmitted ", this.registerForm);
 }
