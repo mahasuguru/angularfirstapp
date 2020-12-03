@@ -16,7 +16,10 @@
 }
 /*.form-error-element {
   border: 2px solid red;
-}*/
+}
 .ng-touched:not(form).ng-invalid{
+  border: 2px solid red;
+}*/
+.error-message {
   border: 2px solid red;
 }

@@ -23,19 +23,16 @@ function rangeValidator(min: number, max: number): ValidatorFn {
   };
 }
 
-// function rangeValidator(
-//   control: AbstractControl
-// ): { [key: string]: boolean } | null {
-//   console.log("Control - ", control);
-//   if (
-//     control !== null &&
-//     (isNaN(control.value) || control.value < 1 || control.value > m5ax)
-//   ) {
-//     return { range: true };
-//   }
-//   //If validation rule passes, we return null
-//   return null;
-// };
+function match(control: AbstractControl): { [key: string]: boolean } | null {
+  let email = control.get("emailAddress");
+  let confirmEmail = control.get("confirmEmailAddress");
+  console.log("Control inside Mathc", email, confirmEmail);
+
+  if (email.value !== confirmEmail.value) {
+    return { match: true };
+  }
+  return null;
+}
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -61,7 +58,13 @@ export class RegisterComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
       ],
-      emailAddress: ["", [Validators.required, Validators.email]],
+      emailGroup: this.fb.group(
+        {
+          emailAddress: ["", [Validators.required, Validators.email]],
+          confirmEmailAddress: ["", [Validators.required]],
+        },
+        { validators: match }
+      ),
       phoneNumber: "",
       notificationMedium: "email",
       isSubscribe: false,
