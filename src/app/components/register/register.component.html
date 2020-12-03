@@ -20,9 +20,7 @@
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"
-        formControlName="emailAddress" [ngClass]="{'error-message': registerForm.get('emailGroup').errors ||
-        (!registerForm.get('emailGroup.emailAddress').valid && registerForm.get('emailGroup.emailAddress').touched &&
-        registerForm.get('emailGroup.emailAddress').errors?.required)}">
+        formControlName="emailAddress" [ngClass]="{'error-class':registerForm.get('emailGroup').errors}">
 
       <div class="text-danger" *ngIf="!registerForm.get('emailGroup.emailAddress').valid
                                     && registerForm.get('emailGroup.emailAddress').touched
@@ -34,25 +32,22 @@
         Not a valid email address</div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" for="confirmEmailAddress">
       <label for="confirmEmailAddress">Confirm Email address</label>
       <input type="email" class="form-control" id="confirmEmailAddress" placeholder="Confirm email"
         formControlName="confirmEmailAddress"
-        [ngClass]="{'error-message':(!registerForm.get('emailGroup.confirmEmailAddress').valid
+        [ngClass]="{'error-class':registerForm.get('emailGroup').errors}">
+      
+        <div class="text-danger" *ngIf="!registerForm.get('emailGroup.confirmEmailAddress').valid
         && registerForm.get('emailGroup.confirmEmailAddress').touched
-        && registerForm.get('emailGroup.confirmEmailAddress').errors?.required) || registerForm.get('emailGroup').errors}">
-      <div class="text-danger" *ngIf="!registerForm.get('emailGroup.confirmEmailAddress').valid
-                                    && registerForm.get('emailGroup.confirmEmailAddress').touched
-                                    && registerForm.get('emailGroup.confirmEmailAddress').errors?.required">
-        Confirm Email is required</div>
-  
-<div class="text-danger"
-      *ngIf="!registerForm?.get('emailGroup.match')?.valid && registerForm?.get('emailGroup.match')?.touched && registerForm?.get('emailGroup.match')?.errors">
-      Confirm Email is match with email long</div>
-    </div>
+        && registerForm.get('emailGroup.confirmEmailAddress').errors?.required">
+Confirm Email is required</div>
+      <div class="text-danger"
+        *ngIf="!registerForm?.get('emailGroup')?.valid && registerForm?.get('emailGroup')?.touched && registerForm?.get('emailGroup')?.errors?.matchEmail">
+        Email and Confirm Email should match</div>
     {{registerForm.get("emailGroup").errors | json}}
   </div>
-
+  </div>
 
 
       <div class="form-group">
@@ -91,12 +86,12 @@
       <div formGroupName="{{i}}">
         <div class="form-check form-check-inline">
           Address Type
-          <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="addressType{{i}}" formControlName="addressType" value="home">
+          <label class="form-check-label" for="{{'addressType_'+i}}">
+            <input class="form-check-input" type="radio" id="{{'addressType_'+i}}" formControlName="addressType" value="home">
             Home
           </label>
-          <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="addressType{{i}}" formControlName="addressType"
+          <label class="form-check-label" for="{{'addressType_'+i}}">
+            <input class="form-check-input" type="radio" id="{{'addressType_'+i}}" formControlName="addressType"
               value="office">
             Office
           </label>
@@ -144,8 +139,4 @@
   <button type="button" class="btn btn-outline-primary" (click)="fillWithDummyData()">Fetch Test Data</button>
 </form>
 <hr>
-<h6 class="text-info">Form Value : {{registerForm.value | json}}</h6>
-<h6 class="text-info">VALID : {{registerForm.valid | json}}</h6>
-<h6 class="text-info">Touched : {{registerForm.touched | json}}</h6>
-<h6 class="text-info">Dirty : {{registerForm.dirty | json}}</h6>
 </div>

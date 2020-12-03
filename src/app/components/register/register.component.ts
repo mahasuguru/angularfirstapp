@@ -23,13 +23,13 @@ function rangeValidator(min: number, max: number): ValidatorFn {
   };
 }
 
-function match(control: AbstractControl): { [key: string]: boolean } | null {
+function matchEmail (control: AbstractControl): { [key: string]: boolean } | null {
   let email = control.get("emailAddress");
   let confirmEmail = control.get("confirmEmailAddress");
   console.log("Control inside Mathc", email, confirmEmail);
 
   if (email.value !== confirmEmail.value) {
-    return { match: true };
+    return { matchEmail : true };
   }
   return null;
 }
@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
           emailAddress: ["", [Validators.required, Validators.email]],
           confirmEmailAddress: ["", [Validators.required]],
         },
-        { validators: match }
+        { validators: matchEmail  }
       ),
       phoneNumber: "",
       notificationMedium: "email",

@@ -20,6 +20,10 @@
 .ng-touched:not(form).ng-invalid{
   border: 2px solid red;
 }*/
-.error-message {
+.ng-invalid:not(form):not([formgroupname]):not([formarrayname]):not(:first-child).ng-touched {
+  border: 2px solid red;
+}
+
+.error-class {
   border: 2px solid red;
 }
