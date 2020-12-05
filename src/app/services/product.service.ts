@@ -20,20 +20,20 @@ export class ProductService {
   //  return this.http
   //    .get<IProduct>(`${this._baseUrl}/open/products/${id}`)
   //    .pipe(catchError(this.handleError));
-      return this.http.get<IProduct>(`${this._baseUrl}/products/${id}`);
+      return this.http.get<IProduct>(`${this._baseUrl}/open/products/${id}`);
   }
   getProducts(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(`${this._baseUrl}/products`);
+    return this.http.get<IProduct[]>(`${this._baseUrl}/open/products`);
   }
   changeStatus(id: number, status: string): Observable<IProduct> {
     if (status == "reactivate") {
       return this.http.post<IProduct>(
-        `${this._baseUrl}/products/${id}/reactivate`,
+        `${this._baseUrl}/open/products/${id}/reactivate`,
         null
       );
     } else {
       return this.http.post<IProduct>(
-        `${this._baseUrl}/products/${id}/deactivate`,
+        `${this._baseUrl}/open/products/${id}/deactivate`,
         null
       );
     }

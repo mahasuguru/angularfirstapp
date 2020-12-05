@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import { AbstractControl,FormBuilder, FormGroup, FormControl, ValidatorFn, Validators,FormArray } from '@angular/forms';
 import {
   ActivatedRouteSnapshot,
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
   };
 
   registerForm: FormGroup;
-  constructor(private fb: FormBuilder, private route: Router, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private route: Router, private authService: AuthService, private cd: ChangeDetectorRef) { }
   loginForm: FormGroup;
   isSubmitted  =  false;
   ngOnInit(): void {
@@ -88,6 +88,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm
       .get("addressArray")
       ["controls"].push(this.buildAddressGroup());
+      this.cd.detectChanges();
   }
   buildAddressGroup(): FormGroup {
     return this.fb.group({
