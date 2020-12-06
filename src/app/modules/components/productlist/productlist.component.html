@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="products && products.length; else noProducts">
+<!-- <div class="row" *ngIf="products && products.length; else noProducts">
   <div class="col-md-4 mt-5" *ngFor="let product of products ; let i= index">
 
     <app-products [product]="product"  (onDelete)="onProductDeleted($event)"
@@ -37,7 +37,15 @@
     </app-products>
 
   </div>
-</div>
+</div> -->
+<mat-grid-list cols="4" rowHeight="3:5" *ngIf="products && products.length; else noProducts">
+  <mat-grid-tile *ngFor="let product of products; let i = index;">
+    <app-products [product]="product" [canShowImage]="showImages"
+      (onDelete)="onProductDeleted($event)" (onStatusChanged)="onStatusChanged($event)">
+    </app-products>
+  </mat-grid-tile>
+</mat-grid-list>
+
 <ng-template #noProducts>
   <div class="alert alert-danger" role="alert">
     <strong>OOPS !! We do not have any products.</strong>

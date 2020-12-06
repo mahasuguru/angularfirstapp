@@ -11,6 +11,7 @@ import { ProductDetailsGuardService } from "src/app/guards/product-details-guard
 import { ProductResolverService } from "src/app/resolvers/product-resolver.service";
 import { SharedModule } from "src/app/shared/shared.module";
 import { CreateProductComponent } from '..//components/create-product/create-product.component';
+import { MaterialModule } from "src/app/material/material.module";
 @NgModule({
   declarations: [
     ProductlistComponent,
@@ -40,6 +41,7 @@ import { CreateProductComponent } from '..//components/create-product/create-pro
       },
     ]),
      SharedModule,
+     MaterialModule,
   ],
 })
 export class ProductsModule { }

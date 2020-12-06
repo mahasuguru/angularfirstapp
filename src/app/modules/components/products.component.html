@@ -1,4 +1,29 @@
-
+<div class="card text-left">
+  <mat-card class="example-card">
+    <img mat-card-image *ngIf="canShowImage" [src]="product.imageUrl"
+      [title]="product.productName">
+    <mat-card-content>
+      <h4>{{product.productName | uppercase}}</h4>
+      <p>Description : {{product.description | nullOrEmpty :  'Not Available' | uppercase}}
+      </p>
+      <p [ngStyle]="getPriceStyles(product)">Price :
+        {{product.price | currency : 'INR':'Rs ' : '3.2-2' }}</p>
+      <p>Released On : {{product.releaseDate | date : 'fullDate'}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary"
+      #detailsButton [routerLink]="['/products',product.productId]"
+      routerLinkActive="router-link-active">Details</button>
+      <button mat-raised-button color="accent" [disabled]="!product.isActive">Buy
+        Now</button>
+      <button mat-raised-button color="warn" [disabled]="!product.isActive"
+        (click)="deleteProduct(product.productId)">Delete</button>
+      <button mat-raised-button *ngIf="!product.isActive"
+        (click)="changeStatus(product.productId,'activate')">Activate</button>
+      <button mat-raised-button *ngIf="product.isActive"
+        (click)="changeStatus(product.productId,'deactivate')">Deactivate</button>
+    </mat-card-actions>
+  </mat-card>
   <div class="accordianBody">
     <p class="card-text">Des : {{product.description | nullOrEmpty : 'N/A'}}</p>
     <p class="card-text">Released On : {{product.releaseDate | date : 'fullDate'}}</p>
@@ -6,7 +31,7 @@
       {{product.price | currency :'INR' : 'Rs ' : '2.2-2' }}</p>
   </div>
   <hr />
-  <div class="accordianFooter">
+ <!-- <div class="accordianFooter">
 
     <button href="#" class="btn btn-primary mr-1 btn-sm" #detailsButton [routerLink]="['/products',product.productId]"
     routerLinkActive="router-link-active">Details</button>
@@ -16,5 +41,5 @@
       *ngIf="product.isActive">Deactivate</button>
     <button href="#" class="btn btn-info mr-1 btn-sm" (click)="changeStatus(product.productId,'reactivate')"
       *ngIf="!product.isActive">Activate</button>
-  </div>
+  </div>-->
 
