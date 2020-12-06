@@ -5,13 +5,29 @@ import { LowerCasePipe, UpperCasePipe } from "@angular/common";
 import { ProductService } from "src/app/services/product.service";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-
+import { MatTableDataSource } from "@angular/material/table";
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',
+  styles: [
+    `
+      table {
+        width: 100%;
+      }
+    `,
+  ],
   styleUrls: ['./productlist.component.css']
 })
 export class ProductlistComponent implements OnInit, OnDestroy{
+  displayedColumns: string[] = [
+    "productName",
+    "description",
+    "releaseDate",
+    "rating",
+    "price",
+  ];
+  dataSource: MatTableDataSource<IProduct>;
+
   private ngUnsubscribe: Subject<any> = new Subject();
   constructor( private upperCasePipe: UpperCasePipe,
     private lowerCasePipe: LowerCasePipe, private productService: ProductService) {
@@ -40,6 +56,7 @@ export class ProductlistComponent implements OnInit, OnDestroy{
           console.log(data);
           this.products = data;
           this.actualProducts = [...this.products];
+          this.dataSource = new MatTableDataSource<IProduct>(data);
         },
         (error) => {
           console.log("ERROR -", error);
