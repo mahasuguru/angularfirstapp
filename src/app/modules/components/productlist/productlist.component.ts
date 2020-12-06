@@ -6,31 +6,17 @@ import { ProductService } from "src/app/services/product.service";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
+
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',
-  styles: [
-    `
-      table {
-        width: 100%;
-      }
-    `,
-  ],
   styleUrls: ['./productlist.component.css']
 })
-export class ProductlistComponent implements OnInit, OnDestroy, AfterViewInit{
-  displayedColumns: string[] = [
-    "productName",
-    "description",
-    "releaseDate",
-    "rating",
-    "price",
-  ];
+export class ProductlistComponent implements OnInit, OnDestroy{
   dataSource: MatTableDataSource<IProduct>;
 
   private ngUnsubscribe: Subject<any> = new Subject();
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+ 
   constructor( private upperCasePipe: UpperCasePipe,
     private lowerCasePipe: LowerCasePipe, private productService: ProductService) {
 
@@ -44,7 +30,7 @@ export class ProductlistComponent implements OnInit, OnDestroy, AfterViewInit{
   selectedSort: string = "";
   products: IProduct[];
   actualProducts: any[];
-  ngAfterViewInit() {}
+  
     ngOnInit() {
 
       this.loadInitialData();
@@ -58,8 +44,7 @@ export class ProductlistComponent implements OnInit, OnDestroy, AfterViewInit{
           console.log(data);
           this.products = data;
           this.actualProducts = [...this.products];
-          this.dataSource = new MatTableDataSource<IProduct>(data);
-          this.dataSource.paginator = this.paginator;
+      
         },
         (error) => {
           console.log("ERROR -", error);
