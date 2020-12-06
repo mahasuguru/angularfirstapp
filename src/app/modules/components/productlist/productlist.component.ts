@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { AfterViewInit,Component, OnInit,OnDestroy,ViewChild  } from '@angular/core';
 import { IProduct } from 'src/app/interfaces/product.interface';
 import { IfNullOrEmpty } from "src/app/pipes/if-null-or-empty.pipe";
 import { LowerCasePipe, UpperCasePipe } from "@angular/common";
@@ -6,6 +6,7 @@ import { ProductService } from "src/app/services/product.service";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
 import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
 @Component({
   selector: 'app-productlist',
   templateUrl: './productlist.component.html',
@@ -18,7 +19,7 @@ import { MatTableDataSource } from "@angular/material/table";
   ],
   styleUrls: ['./productlist.component.css']
 })
-export class ProductlistComponent implements OnInit, OnDestroy{
+export class ProductlistComponent implements OnInit, OnDestroy, AfterViewInit{
   displayedColumns: string[] = [
     "productName",
     "description",
@@ -29,6 +30,7 @@ export class ProductlistComponent implements OnInit, OnDestroy{
   dataSource: MatTableDataSource<IProduct>;
 
   private ngUnsubscribe: Subject<any> = new Subject();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor( private upperCasePipe: UpperCasePipe,
     private lowerCasePipe: LowerCasePipe, private productService: ProductService) {
 
@@ -42,7 +44,7 @@ export class ProductlistComponent implements OnInit, OnDestroy{
   selectedSort: string = "";
   products: IProduct[];
   actualProducts: any[];
-
+  ngAfterViewInit() {}
     ngOnInit() {
 
       this.loadInitialData();
@@ -57,6 +59,7 @@ export class ProductlistComponent implements OnInit, OnDestroy{
           this.products = data;
           this.actualProducts = [...this.products];
           this.dataSource = new MatTableDataSource<IProduct>(data);
+          this.dataSource.paginator = this.paginator;
         },
         (error) => {
           console.log("ERROR -", error);
