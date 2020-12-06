@@ -1,11 +1,9 @@
 import { AfterViewInit,Component, OnInit,OnDestroy,ViewChild  } from '@angular/core';
 import { IProduct } from 'src/app/interfaces/product.interface';
-import { IfNullOrEmpty } from "src/app/pipes/if-null-or-empty.pipe";
 import { LowerCasePipe, UpperCasePipe } from "@angular/common";
 import { ProductService } from "src/app/services/product.service";
 import { Subject } from "rxjs";
 import { takeUntil } from "rxjs/operators";
-import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: 'app-productlist',
@@ -13,7 +11,6 @@ import { MatTableDataSource } from "@angular/material/table";
   styleUrls: ['./productlist.component.css']
 })
 export class ProductlistComponent implements OnInit, OnDestroy{
-  dataSource: MatTableDataSource<IProduct>;
 
   private ngUnsubscribe: Subject<any> = new Subject();
  
