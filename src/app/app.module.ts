@@ -25,6 +25,7 @@ import { ProductsModule } from './modules/products/products.module';
 import { EmployeeModule } from './modules/employees/employee/employee.module';
  import { SharedModule } from './shared/shared.module';
  import { WiproHttpInterceptor } from "./services/http-interceptor.service";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { EmployeeModule } from './modules/employees/employee/employee.module';
   //  ProductsModule,
   //  EmployeeModule,
    SharedModule,
+  BrowserAnimationsModule,
   ],
   providers: [UpperCasePipe, LowerCasePipe, IfNullOrEmpty,  {
     provide: ProductService,
